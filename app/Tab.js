@@ -94,8 +94,6 @@ export default class TabsControlled extends React.Component {
     {
       searchdata= cardHelpers.getSearchCard(this.state.name);
 
-      console.log(searchdata);
-
       if(searchdata.Response == "True")
       {
         document.getElementById('search_card').style.display='block';
