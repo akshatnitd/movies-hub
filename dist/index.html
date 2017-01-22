@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/png" href="img/icon.png">
+  <link rel="manifest" href="manifest.json">
+  <meta name="application-name" content="PregBuddy">
+  <meta name="theme-color" content="#1bbc9b">
+  <title>Movies Hub</title>
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+  <script src="jquery.min.js"  type="text/javascript"></script>
+  <script src="jquery.lazyload.js" type="text/javascript"></script>
+  <script>
+    document.addEventListener('contextmenu', event => event.preventDefault());
+  </script>
+  <!-- start Mixpanel --><script type="text/javascript">(function(e,a){if(!a.__SV){var b=window;try{var c,l,i,j=b.location,g=j.hash;c=function(a,b){return(l=a.match(RegExp(b+"=([^&]*)")))?l[1]:null};g&&c(g,"state")&&(i=JSON.parse(decodeURIComponent(c(g,"state"))),"mpeditor"===i.action&&(b.sessionStorage.setItem("_mpcehash",g),history.replaceState(i.desiredHash||"",e.title,j.pathname+j.search)))}catch(m){}var k,h;window.mixpanel=a;a._i=[];a.init=function(b,c,f){function e(b,a){var c=a.split(".");2==c.length&&(b=b[c[0]],a=c[1]);b[a]=function(){b.push([a].concat(Array.prototype.slice.call(arguments,
+0)))}}var d=a;"undefined"!==typeof f?d=a[f]=[]:f="mixpanel";d.people=d.people||[];d.toString=function(b){var a="mixpanel";"mixpanel"!==f&&(a+="."+f);b||(a+=" (stub)");return a};d.people.toString=function(){return d.toString(1)+".people (stub)"};k="disable time_event track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config reset people.set people.set_once people.increment people.append people.union people.track_charge people.clear_charges people.delete_user".split(" ");
+for(h=0;h<k.length;h++)e(d,k[h]);a._i.push([b,c,f])};a.__SV=1.2;b=e.createElement("script");b.type="text/javascript";b.async=!0;b.src="undefined"!==typeof MIXPANEL_CUSTOM_LIB_URL?MIXPANEL_CUSTOM_LIB_URL:"file:"===e.location.protocol&&"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js".match(/^\/\//)?"https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js":"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js";c=e.getElementsByTagName("script")[0];c.parentNode.insertBefore(b,c)}})(document,window.mixpanel||[]);
+mixpanel.init("c8d8a3538e01fe8594d24f93e131e14e");</script><!-- end Mixpanel -->
+</head>
+<body>
+  <header>
+  </header>
+  <div id="app">
+  </div>
+  <script src="https://www.gstatic.com/firebasejs/3.6.6/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyCXJ7lDwvGNq9PUAZhzpnbBUU72fXasWVI",
+    authDomain: "nit-hacakthon.firebaseapp.com",
+    databaseURL: "https://nit-hacakthon.firebaseio.com",
+    storageBucket: "nit-hacakthon.appspot.com",
+    messagingSenderId: "404901358310"
+  };
+  firebase.initializeApp(config);
+</script>
+  <script>
+    const messaging = firebase.messaging();
+
+messaging.onTokenRefresh(function() {
+messaging.getToken()
+.then(function(refreshedToken) {
+    console.log('Token refreshed.');
+    setTokenSentToServer(false);
+    
+    sendTokenToServer(refreshedToken);
+    
+    resetUI();
+  })
+  .catch(function(err) {
+    console.log('Unable to retrieve refreshed token ', err);
+    showToken('Unable to retrieve refreshed token ', err);
+  });
+});
+
+  messaging.onMessage(function(payload) {
+    console.log("Message received. ", payload.notification);
+    //appendMessage(payload);
+  });
+
+  function resetUI() {
+    messaging.getToken()
+    .then(function(currentToken) {
+      if (currentToken) {
+        sendTokenToServer(currentToken);
+      } 
+
+      else {
+        console.log('No Instance ID token available. Request permission to generate one.');
+        setTokenSentToServer(false);
+      }
+    })
+    .catch(function(err) {
+      console.log('An error occurred while retrieving token. ', err);
+      setTokenSentToServer(false);
+    });
+  }
+
+  function sendTokenToServer(currentToken) {
+    if (!isTokenSentToServer()) {
+      console.log('Sending token to server...');
+
+      //Send token to server    
+      }
+      
+    else {
+      console.log('Token already sent to server so won\'t send it again ' +
+          'unless it changes');
+    }
+  }
+  
+  function isTokenSentToServer() {
+    if (window.localStorage.getItem('sentToServer') == 1) {
+          return true;
+    }
+    return false;
+  }
+  function setTokenSentToServer(sent) {
+    if (sent) {
+      window.localStorage.setItem('sentToServer', 1);
+    } else {
+      window.localStorage.setItem('sentToServer', 0);
+    }
+  }
+
+  function requestPermission() {
+    console.log('Requesting permission...');
+    messaging.requestPermission()
+    .then(function() {
+      console.log('Notification permission granted.');
+      
+      resetUI();
+    })
+    .catch(function(err) {
+      console.log('Unable to get permission to notify.', err);
+    });
+  }
+  
+  function deleteToken() {
+    messaging.getToken()
+    .then(function(currentToken) {
+      messaging.deleteToken(currentToken)
+      .then(function() {
+        console.log('Token deleted.');
+        setTokenSentToServer(false);
+        
+        resetUI();
+        
+      })
+      .catch(function(err) {
+        console.log('Unable to delete token. ', err);
+      });
+    })
+    .catch(function(err) {
+      console.log('Error retrieving Instance ID token. ', err);
+      showToken('Error retrieving Instance ID token. ', err);
+    });
+  }
+  </script>
+<script type="text/javascript" src="/index_bundle.js"></script></body>
+</html>
