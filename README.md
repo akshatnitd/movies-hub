@@ -10,7 +10,7 @@ Movie information Progressive Web App built using ReactJS
 ### Run: 
 * Clone the repo.
 * Run ```npm install``` inside the root directory.
-* Run ``npm run start``` to run localhost server.
+* Run ```npm run start``` to run localhost server.
 * Run ```localhost:8080``` in your browser.
 
-#### Site deployed at movieshub.surge.sh
+#### Site deployed at movies-hub.surge.sh
