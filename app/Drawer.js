@@ -19,7 +19,7 @@ export default class DrawerNav extends React.Component {
       <div>
       	<AppBar
       			title="Movies Hub"
-        		style = {{backgroundColor: '#1BBC9B' }}
+        		style = {{backgroundColor: '#e52d27' }}
             titleStyle= {{fontSize: 20}}
         		iconClassNameRight="muidocs-icon-navigation-expand-more"
             iconStyleRight={{fontSize: 12, color: '#FFFFFF', marginTop: 25, paddingRight: 5}}

@@ -6,6 +6,7 @@ import cardHelpers from './utils_card';
 import { bindKeyboard } from 'react-swipeable-views-utils';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
+import {topmovies} from './top'
 
 const BindKeyboardSwipeableViews = bindKeyboard(SwipeableViews);
 
@@ -24,7 +25,7 @@ const styles = {
  } ,
 
  textbox: {
-    color: '#1BBC9B'    
+    color: '#e52d27'
   },
 
    label: {
@@ -33,7 +34,7 @@ const styles = {
  },
 
   textunderline: {
-    borderColor: '#1BBC9B'    
+    borderColor: '#e52d27'
   },
 
     borderMarginSearch: {
@@ -41,7 +42,7 @@ const styles = {
     marginTop: 25,
     padding: 20,
     maxWidth: 600}
-  
+
 ,
 
   borderMargin : {
@@ -51,10 +52,10 @@ const styles = {
   } ,
 
   tabBar: {
-    backgroundColor: '#1BBC9B' ,
+    backgroundColor: '#e52d27' ,
     overflowX: 'scroll',
     height: 'auto',
-  }} 
+  }}
 
 export default class TabsControlled extends React.Component {
 
@@ -64,6 +65,7 @@ export default class TabsControlled extends React.Component {
       slideIndex: 0,
       name: '',
       name_error_text: '',
+      movies: topmovies
     };
   }
 
@@ -86,7 +88,7 @@ export default class TabsControlled extends React.Component {
       err=err+1;
       this.setState({name_error_text: "Please enter the movie/series name"});
     }
-    
+
     else
       this.setState({name_error_text: ""});
 
@@ -107,7 +109,7 @@ export default class TabsControlled extends React.Component {
     }
 
   }
-  
+
   render() {
      return (
       <div>
@@ -116,7 +118,7 @@ export default class TabsControlled extends React.Component {
           onChange={this.handleChange}
           value={this.state.slideIndex}
           tabItemContainerStyle= {styles.tabBar}
-          inkBarStyle = {{backgroundColor: '#F72459',width: 60, display:'none'}} 
+          inkBarStyle = {{backgroundColor: '#F72459',width: 60, display:'none'}}
         >
           <Tab label="Search by name" value={0} style={styles.tabLabel}  />
           <Tab label="Top rated movies" value={1} style={styles.tabLabel}  />
@@ -127,57 +129,87 @@ export default class TabsControlled extends React.Component {
           onChangeIndex={this.handleChange}
           resistance = {true} >
 
-        <div>
-        <div style={styles.borderMarginSearch}>
-         <TextField
-            defaultValue=""
-            floatingLabelText="Movie/Search Title"
-            floatingLabelFocusStyle={styles.textbox}
-            errorText={this.state.name_error_text}
-            underlineFocusStyle={styles.textunderline}
-            onChange={this.onChangeName}
-            fullWidth={true}
-            />
+          <div>
+            <div style={styles.borderMarginSearch}>
+              <TextField
+                defaultValue=""
+                floatingLabelText="Movie/Series Title"
+                floatingLabelFocusStyle={styles.textbox}
+                errorText={this.state.name_error_text}
+                underlineFocusStyle={styles.textunderline}
+                onChange={this.onChangeName}
+                fullWidth={true}
+              />
 
             <div style={{textAlign: 'center'}}>
-          <RaisedButton 
-            label="Search" 
-            backgroundColor='#1bbc9b' 
-            labelColor="#FFFFFF" 
-            labelStyle={styles.label} 
-            style={{marginTop: 30}}
-            onClick={this.onClickSearch} 
-            id="search_by_name"/>       
-        </div>
-        <div id="search_card" style={{display:'none'}}>
-        <CardSearch
-          title={searchdata.Title} 
-          category={searchdata.Genre} 
-          desc={searchdata.Plot} 
-          image_url={searchdata.Poster} 
-          actors={searchdata.Actors}
-          awards={searchdata.Awards}
-          director={searchdata.Director}
-          lang={searchdata.Language}
-          releaseDate={searchdata.Released}
-          duration={searchdata.Runtime}
-          writer={searchdata.Writer}
-          year={searchdata.Year}
-          imdb_id={searchdata.imdbID}
-          imdb_rating={searchdata.imdbRating}
-          imdb_votes={searchdata.imdbVotes}
-          />
+              <RaisedButton
+                label="Search"
+                backgroundColor='#e52d27'
+                labelColor="#FFFFFF"
+                labelStyle={styles.label}
+                style={{marginTop: 30}}
+                onClick={this.onClickSearch}
+                id="search_by_name"/>
+            </div>
+
+            <div id="search_card" style={{display:'none'}}>
+              <CardSearch
+                title={searchdata.Title}
+                category={searchdata.Genre}
+                desc={searchdata.Plot}
+                image_url={searchdata.Poster}
+                actors={searchdata.Actors}
+                awards={searchdata.Awards}
+                director={searchdata.Director}
+                lang={searchdata.Language}
+                releaseDate={searchdata.Released}
+                duration={searchdata.Runtime}
+                writer={searchdata.Writer}
+                year={searchdata.Year}
+                imdb_id={searchdata.imdbID}
+                imdb_rating={searchdata.imdbRating}
+                imdb_votes={searchdata.imdbVotes}
+              />
+            </div>
+          </div>
         </div>
 
-        </div>
-        </div>
 
-        
-        </BindKeyboardSwipeableViews>
-
-      
-
+        <div>
+            {this.state.movies.map(function(movie)
+              {
+              return (
+              <div style = {styles.borderMargin} className="animated slideInUp" >
+                <CardSearch
+                    title={movie[0]}
+                    category={movie[4]}
+                    desc={movie[8]}
+                    image_url={movie[12]}
+                    actors={movie[7]}
+                    awards={movie[11]}
+                    director={movie[5]}
+                    lang={movie[9]}
+                    releaseDate={movie[2]}
+                    duration={movie[3]}
+                    writer={movie[6]}
+                    year={movie[1]}
+                    imdb_id={movie[16]}
+                    imdb_rating={movie[14]}
+                    imdb_votes={movie[15]}
+                />
+                </div>
+              )
+            }
+          )
+        }
       </div>
+
+
+        </BindKeyboardSwipeableViews>
+        </div>
+
+
+
     );
   }
 }

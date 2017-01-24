@@ -42,7 +42,7 @@ const styles = {
 
    category: {
     color: '#757575',  
-    border: '1.8px solid #1BBC9B',
+    border: '1.8px solid #000000',
     padding: 8,
     borderRadius: 5,
     fontSize: 16,

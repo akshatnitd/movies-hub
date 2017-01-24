@@ -23,14 +23,6 @@ const muiTheme = getMuiTheme({
   }
 });
 
-const ThemeColors = {
-		colorPrimary: '#1BBC9B',
-		colorSecondary: '#F72459',
-		primaryDark: '#148D74',
-		textColorPrimary: '#212121',
-		textColorSecondary: '#757575',
-}
-
 class Home extends React.Component {
   constructor(props) {
     super(props);
@@ -45,7 +37,7 @@ class Home extends React.Component {
   }
 
   componentDidMount =() => {
-    resetUI();
+    //resetUI();
   }
 
 
