@@ -25,7 +25,7 @@ const styles = {
  } ,
 
  textbox: {
-    color: '#e52d27'
+    color: '#b31217'
   },
 
    label: {
@@ -34,7 +34,7 @@ const styles = {
  },
 
   textunderline: {
-    borderColor: '#e52d27'
+    borderColor: '#b31217'
   },
 
     borderMarginSearch: {
@@ -52,7 +52,7 @@ const styles = {
   } ,
 
   tabBar: {
-    backgroundColor: '#e52d27' ,
+    backgroundColor: '#b31217' ,
     overflowX: 'scroll',
     height: 'auto',
   }}
@@ -118,7 +118,7 @@ export default class TabsControlled extends React.Component {
           onChange={this.handleChange}
           value={this.state.slideIndex}
           tabItemContainerStyle= {styles.tabBar}
-          inkBarStyle = {{backgroundColor: '#F72459',width: 60, display:'none'}}
+          inkBarStyle = {{backgroundColor: '#000000'}}
         >
           <Tab label="Search by name" value={0} style={styles.tabLabel}  />
           <Tab label="Top rated movies" value={1} style={styles.tabLabel}  />
@@ -134,7 +134,7 @@ export default class TabsControlled extends React.Component {
               <TextField
                 defaultValue=""
                 floatingLabelText="Movie/Series Title"
-                floatingLabelFocusStyle={styles.textbox}
+                                floatingLabelFocusStyle={styles.textbox}
                 errorText={this.state.name_error_text}
                 underlineFocusStyle={styles.textunderline}
                 onChange={this.onChangeName}
@@ -144,7 +144,7 @@ export default class TabsControlled extends React.Component {
             <div style={{textAlign: 'center'}}>
               <RaisedButton
                 label="Search"
-                backgroundColor='#e52d27'
+                backgroundColor='#b31217'
                 labelColor="#FFFFFF"
                 labelStyle={styles.label}
                 style={{marginTop: 30}}
@@ -169,6 +169,7 @@ export default class TabsControlled extends React.Component {
                 imdb_id={searchdata.imdbID}
                 imdb_rating={searchdata.imdbRating}
                 imdb_votes={searchdata.imdbVotes}
+                down_link={"https://fmovies.se/search?keyword="+searchdata.Title}
               />
             </div>
           </div>
@@ -196,6 +197,7 @@ export default class TabsControlled extends React.Component {
                     imdb_id={movie[16]}
                     imdb_rating={movie[14]}
                     imdb_votes={movie[15]}
+                    down_link={movie[18]}
                 />
                 </div>
               )

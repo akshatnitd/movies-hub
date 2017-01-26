@@ -41,6 +41,11 @@ const muiTheme = getMuiTheme({
     textColor: grey900,
   },
   fontFamily: 'Roboto, sans-serif',
+
+  raisedButton : {
+    color: '#b31217',
+    textColor: '#FFFFFF'
+  }
 });
 
 
@@ -92,6 +97,7 @@ export default class Details extends React.Component {
           imdb_id={val.imdb_id}
           imdb_rating={val.imdb_rating}
           imdb_votes={val.imdb_votes}
+          down_link={val.down_link}
       />
         
       </Card>
