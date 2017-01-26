@@ -9,6 +9,8 @@ import ThumbUp from 'material-ui/svg-icons/action/thumb-up';
 import Star from 'material-ui/svg-icons/toggle/star';
 import Avatar from 'material-ui/Avatar';
 import Chip from 'material-ui/Chip';
+import RaisedButton from 'material-ui/RaisedButton';
+import ActionGetApp from 'material-ui/svg-icons/action/get-app';
 
 const styles = {
   card: {
@@ -123,6 +125,13 @@ class ArticleCard extends React.Component {
         </Chip>
         </div>
     </CardText>
+        <RaisedButton
+          href={this.props.down_link}
+          style={{marginLeft: 20 }}
+          target="_blank"
+          label="Download"
+          icon={<ActionGetApp />}
+        />
   </div>
     );
   }
@@ -130,3 +139,4 @@ class ArticleCard extends React.Component {
 
 
 export default ArticleCard;
+

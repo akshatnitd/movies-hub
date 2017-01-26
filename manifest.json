@@ -9,7 +9,7 @@
   "start_url": "index.html",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color" : "#e52d27",
-  "theme_color": "#e52d27",
+  "background_color" : "#b31217",
+  "theme_color": "#b31217",
   "gcm_sender_id": "103953800507"
 }

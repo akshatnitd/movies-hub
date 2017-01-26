@@ -2,7 +2,7 @@ import React from 'react';
 
 const styles = {
 	border: {
-		background: '#148d74',
+		background: '#b31217',
 		paddingTop: 250,
 		paddingBottom: 250,
 		fontFamily: 'Roboto, sans-serif',
