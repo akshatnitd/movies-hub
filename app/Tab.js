@@ -13,6 +13,14 @@ const BindKeyboardSwipeableViews = bindKeyboard(SwipeableViews);
 var searchdata={};
 
 const styles = {
+	discuss: {
+		maxWidth: 600,
+		width: 'auto',
+		margin: 'auto',
+		padding: 10
+
+	},
+
   headline: {
     fontSize: 24,
     paddingTop: 16,
@@ -111,6 +119,21 @@ export default class TabsControlled extends React.Component {
   }
 
   render() {
+
+
+  	var disqus_config = function () {
+this.page.url = 'http://movies-hub.surge.sh';  
+this.page.identifier = ''; 
+};
+
+(function() { 
+var d = document, s = d.createElement('script');
+s.src = '//movies-hub-surge-sh.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+
+
      return (
       <div>
        <Tabs
@@ -122,6 +145,7 @@ export default class TabsControlled extends React.Component {
         >
           <Tab label="Search by name" value={0} style={styles.tabLabel}  />
           <Tab label="Top rated movies" value={1} style={styles.tabLabel}  />
+          <Tab label="Discuss" value={2} style={styles.tabLabel}  />
         </Tabs>
 
         <BindKeyboardSwipeableViews
@@ -204,6 +228,9 @@ export default class TabsControlled extends React.Component {
             }
           )
         }
+      </div>
+      <div style={styles.discuss}>
+      <div id="disqus_thread"></div>
       </div>
 
 
